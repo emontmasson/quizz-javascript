@@ -1,0 +1,185 @@
+/* css/style.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+#quiz-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+}
+
+#question-texte {
+  font-size: 1.4rem;
+  color: #1f2937;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+#propositions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.proposition-btn {
+  padding: 14px 18px;
+  font-size: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.proposition-btn:hover {
+  background: #eef2ff;
+  border-color: #6366f1;
+}
+
+/* Classes ajoutées dynamiquement en JS lors de la réponse */
+.proposition-btn.correct {
+  background: #d1fae5;
+  border-color: #10b981;
+  color: #065f46;
+}
+
+.proposition-btn.incorrect {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+
+.proposition-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+#score {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+#ecran-quiz {
+    display: none;
+}
+
+/* Bouton principal arrondi */
+.btn-principal {
+  display: inline-block;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #2f1f60;
+  background: linear-gradient(135deg, #6366f1, white);
+  border: none;
+  border-radius: 50px; /* bien arrondi, façon "pilule" */
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  transition: all 0.25s ease;
+}
+
+.btn-principal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.55);
+  filter: brightness(1.05);
+}
+
+.btn-principal:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(99, 102, 241, 0.4);
+}
+
+.btn-principal:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 1rem;
+  color: #1f2937;
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  border-radius: 20px;
+  outline: none;
+  transition: all 0.2s ease;
+  margin-bottom: 5px;
+}
+
+input[type='text']:focus {
+  background: white;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+#chargement {
+  text-align: center;
+  font-style: italic;
+  color: #666;
+  padding: 20px;
+}
+
+.btn-suivant {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-suivant:hover {
+  background: #2563eb;
+}
+
+.btn-recommencer {
+  padding: 12px 32px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 20px;
+}
+
+.btn-recommencer:hover {
+  background: #059669;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Météo</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1>🌤️ Recherche météo</h1>
+    <form id="formulaire-meteo">
+      <input type="text" id="input-ville" name="ville" placeholder="Ex : Paris" required>
+      <button type="submit">Rechercher</button>
+    </form>
+  </header>
+
+  <main class="contenu">
+
+    <div id="meteo-info">Recherchez une ville pour voir la météo</div>
+    <div id="meteo-container"></div>
+    
+  </main>
+  <script src="js/fonction.meteo.js"></script>
+  <script src="js/meteo.js"></script>
+</body>
+</html>
