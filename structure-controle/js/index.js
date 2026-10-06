@@ -27,9 +27,14 @@ const questions = [
 
 const joueur = { 
         prenom: "Alex",
-        score: 0,
-        reponsesFausses: []
+        score: 1,
+        reponsesFausses: [
+            { idQuestion: 1, reponseDonnee: 2 },
+            { idQuestion: 2, reponseDonnee: 0 },
+            { idQuestion: 3, reponseDonnee: 1 }
+        ]
 }
+
 
 /* exercice : Afficher une question avec ses propositions
 En utilisant une boucle for classique, afficher la première question du tableau questions ainsi que ses propositions, numérotées de 0 à 3.

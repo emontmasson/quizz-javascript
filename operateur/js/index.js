@@ -27,9 +27,14 @@ const questions = [
 
 const joueur = { 
         prenom: "Alex",
-        score: 3,
-        reponsesFausses: []
+        score: 1,
+        reponsesFausses: [
+            { idQuestion: 1, reponseDonnee: 2 },
+            { idQuestion: 2, reponseDonnee: 0 },
+            { idQuestion: 3, reponseDonnee: 1 }
+        ]
 }
+
 
 
 /*

@@ -17,11 +17,11 @@ Représenter plusieurs questions du quiz et les afficher
 */
 
 
+
+
 /* exercice  : Créer un objet joueur avec les propriétés suivantes :
 Prénom du joueur
 Score
 Les réponses fausses données avec l'id de la question et l'index de la réponse donnée.
-
-
-
 */
+
