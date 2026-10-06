@@ -33,16 +33,15 @@ function creerQuizz() {
 function creerJoueur(prenomJoueur ) {
     return {
         prenom: prenomJoueur,
-        score: 0,
-        reponsesFausses: []
+        score: 0
         
     }
 }
 
-function verifierReponse(choixReponse, question) {
+function verifierReponse(choixReponse, bonneReponse) {
     // conversion des réponses en int
     choixReponse = parseInt(choixReponse);
-    const bonneReponse = parseInt(question.bonneReponse)
+    bonneReponse = parseInt(bonneReponse)
 
     // permet de vérifier si le joueur a bien répondu à la question
     if(isNaN(choixReponse) || isNaN(bonneReponse)) {
@@ -56,7 +55,7 @@ function verifierReponse(choixReponse, question) {
             return true;
         }
         else {
-            joueur.reponsesFausses.push({idQuestion: question.id, choixReponse})
+           
             // mauvaise réponse
             return false
         }
@@ -67,7 +66,7 @@ function verifierReponse(choixReponse, question) {
 
 
 function afficherQuestion(question) {
-    // Sélectionner l'élément #question-texte et stocker-le dans une variable
+    // utiliser  l'élément #question-texte et stocker-le dans une constante
 
     // Mettre dedans le texte de la question passée en paramètre
 

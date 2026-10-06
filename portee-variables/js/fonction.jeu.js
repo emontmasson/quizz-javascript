@@ -33,15 +33,14 @@ function creerQuizz() {
 function creerJoueur(prenomJoueur ) {
     return {
         prenom: prenomJoueur,
-        score: 0,
-        reponsesFausses: []
+        score: 0
     } 
 }
 
-function verifierReponse(joueur,choixReponse, question) {
+function verifierReponse(joueur,choixReponse, bonneReponse) {
     // conversion des réponses en int
     choixReponse = parseInt(choixReponse);
-    const bonneReponse = parseInt(question.bonneReponse)
+    const bonneReponse = parseInt(bonneReponse)
 
     // permet de vérifier si le joueur a bien répondu à la question
     if(isNaN(choixReponse) || isNaN(bonneReponse)) {
@@ -53,10 +52,7 @@ function verifierReponse(joueur,choixReponse, question) {
             joueur.score += 1;
            
         }
-        else {
-            joueur.reponsesFausses.push({idQuestion: question.id, choixReponse})
-            
-        }
+       
 
         return joueur;
         
