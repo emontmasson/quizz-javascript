@@ -22,6 +22,6 @@ const questionTexte = document.querySelector("#question-texte");
 afficherQuestion(questions[indexQuestion]);
 
 // on modifie l'objet joueur pour tester l'affichage du score
-joueur.score = 3;
+// à déplacer une fois que l'on a cliqué sur la proposition
 afficherScore();
 

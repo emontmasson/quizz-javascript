@@ -38,10 +38,10 @@ function creerJoueur(prenomJoueur ) {
     }
 }
 
-function verifierReponse(choixReponse, bonneReponse) {
+function verifierReponse(choixReponse, question) {
     // conversion des réponses en int
     choixReponse = parseInt(choixReponse);
-    bonneReponse = parseInt(bonneReponse)
+    const bonneReponse = parseInt(question.bonneReponse)
 
     // permet de vérifier si le joueur a bien répondu à la question
     if(isNaN(choixReponse) || isNaN(bonneReponse)) {
@@ -81,7 +81,7 @@ function afficherQuestion(question) {
 
 }
 
-function afficherProposition( proposition, index) {
+function afficherProposition( proposition, index, question) {
     // fonction qui affiche chaque proposition en utilisant createElement 
 
     /* évolution de l'exercice avec data-* : 
