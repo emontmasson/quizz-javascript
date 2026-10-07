@@ -1,6 +1,5 @@
 
 
-
 function creerQuizz() {
     return [
         {
@@ -34,16 +33,15 @@ function creerQuizz() {
 function creerJoueur(prenomJoueur ) {
     return {
         prenom: prenomJoueur,
-        score: 0,
-        reponsesFausses: []
+        score: 0
         
     }
 }
 
-function verifierReponse(choixReponse, question) {
+function verifierReponse(choixReponse, bonneReponse) {
     // conversion des réponses en int
     choixReponse = parseInt(choixReponse);
-    const bonneReponse = parseInt(question.bonneReponse)
+    bonneReponse = parseInt(bonneReponse)
 
     // permet de vérifier si le joueur a bien répondu à la question
     if(isNaN(choixReponse) || isNaN(bonneReponse)) {
@@ -57,7 +55,7 @@ function verifierReponse(choixReponse, question) {
             return true;
         }
         else {
-            joueur.reponsesFausses.push({idQuestion: question.id, choixReponse})
+           
             // mauvaise réponse
             return false
         }
@@ -65,37 +63,88 @@ function verifierReponse(choixReponse, question) {
     }
 
 }
-function afficherQuestion(question) {
-    
 
-    // Change son textContent pour y mettre question.texte
+
+function afficherQuestion(question) {
+    // utiliser  l'élément #question-texte et stocker-le dans une constante
+
+    // Mettre dedans le texte de la question passée en paramètre
+
+    // Pour chaque proposition, créer un bouton  <button class="proposition-btn">${proposition}</button>
+
+
+    propositionsContainer.innerHTML = "";
+    // évolution de l'exercice avec createElement : 
+    // appel de la fonction afficherProposition( proposition, index). 
+    // pour chaque proposotion
     questionTexte.textContent = question.texte;
 
-
     question.propositions.forEach((proposition, index) => {
-        afficherProposition( proposition, index);
-
+        afficherProposition(proposition,index, question);
     });
+
+
+
 }
 
-function afficherBoutonQuestionSuivante() {
-    /* bonus : 
-       - afficher le bouton question suivante une fois le résultat affiché
-       - gérer le clique du bouton suivant pour faire appel à la fonction afficherQuestion(indexQuestion)
-       - s'il n'y a plus de questions, afficher partie terminée et un bouton recommencer
-       - au clique du bouton recommencer, réinitialiser le score du joueur et indexQuestion
+function creerBouton(texte, classes, parent) {
+    const bouton = document.createElement("button");
+    bouton.textContent = texte;
+    bouton.classList = classes;
+
+    parent.appendChild(bouton);
+
+    return bouton;
+}
+
+function recommencerJeu() {
+    indexQuestion = 0;
+    joueur.score = 0;
+    scoreContainer.innerHTML = "";
+    afficherQuestion(questions[indexQuestion]);
+}
+
+function afficherQuestionSuivante() {    
+    indexQuestion++;
+    if(indexQuestion == questions.length) {
+        const boutonRecommencer = creerBouton("Recommencer", ["btn-recommencer"], propositionsContainer);
+        boutonRecommencer.addEventListener("click", () => {
+            recommencerJeu();
+        });
+
+
+    }
+    else {
+        const boutonSuivant = creerBouton("Question suivante", ["btn-suivant"], propositionsContainer);
+        boutonSuivant.addEventListener("click", () => {
+             afficherQuestion(questions[indexQuestion]);
+        });
+       
+    }
+
+}
+
+
+
+function afficherProposition( proposition, index, question) {
+    // fonction qui affiche chaque proposition en utilisant createElement 
+
+    /* évolution de l'exercice avec data-* : 
+    - ajout du code de la diapo 109
+    - lors de l'appel de verifierReponse :
+       - si elle retourne vraie, ajouter la classe correct
+       - si elle retourne faux, ajouter la classe incorrect sur la proposition sélectionnée et la classe correct sur la bonne réponse
+
+    Bonus : appel d'une fonction pour désactiver tous les boutons
     */
-}
 
-function afficherProposition( proposition, index) {
     // 1. Créer un nouvel élément <button>
     const bouton = document.createElement("button");
     // 2. Lui donner son texte
     bouton.textContent = proposition;
+    bouton.setAttribute("data-index", index);
     // 3. Lui ajouter sa classe CSS
     bouton.classList.add("proposition-btn");
-
-    bouton.setAttribute("data-index", index);
     // 4. L'insérer dans le container, SANS toucher aux boutons déjà présents
     propositionsContainer.appendChild(bouton);
 
@@ -103,49 +152,37 @@ function afficherProposition( proposition, index) {
 
         const indexChoisi = bouton.dataset.index;  
         
-        if(verifierReponse(indexChoisi,question)) {
-            bouton.classList.add("correct");
-        }
-        else {
+        if(!verifierReponse(indexChoisi,question.bonneReponse)) {
             bouton.classList.add("incorrect");
-            // recherche de la bonne réponse
-            const bonneReponse = document.querySelector(`.proposition-btn[data-index="${questions[indexQuestion].bonneReponse}"]`);
-            bonneReponse.classList.add("correct");
+           
         }
-        desactiverBoutons();
-        /* bonus :
-            - utiliser indexQuestion pour indiquer que l'on va sur la question suivante
-            - afficher le bouton de la question suivante
-            - afficher le score 
-        
-        */
-        afficherBoutonQuestionSuivante();
+        const boutonCorrect = document.querySelector(`.proposition-btn[data-index="${question.bonneReponse}"]`);
+        boutonCorrect.classList.add("correct");
+
+        desactiverBouton();
         afficherScore();
+        afficherQuestionSuivante();
+    });
+
+        
+    
+}
+
+function desactiverBouton() {
+    const boutonsReponse = document.querySelectorAll(".proposition-btn");
+    boutonsReponse.forEach(boutonReponse => {
+        boutonReponse.setAttribute("disabled", true);
     });
 }
 
-
 function afficherScore() {
-      // on vide le container pour ne pas avoir le score qui s'ajoute à chaque réponse
     scoreContainer.innerHTML = "";
-
-    // création d'un paragraphe pour afficher le score dedans
-    const paragraphe = document.createElement("p");
-    paragraphe.textContent = getScore();
-
-
-    scoreContainer.appendChild(paragraphe);
+    const pScore = document.createElement("p");
+    pScore.textContent = getScore();
+    scoreContainer.appendChild(pScore);
+    
 }
-
 
 function getScore() {
     return `Votre score est de ${joueur.score}/${questions.length}, soit ${(joueur.score/questions.length)*100}%`;
-}
-
-function desactiverBoutons() {
-  // on désactive TOUS les boutons de propositions, pas juste celui cliqué
-  const tousLesBoutons = document.querySelectorAll(".proposition-btn");
-  tousLesBoutons.forEach((btn) => {
-    btn.disabled = true;
-  });
 }

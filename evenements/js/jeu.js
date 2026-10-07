@@ -13,15 +13,19 @@ const propositionsContainer = document.querySelector("#propositions-container");
 // sélection de la div score pour afficher  le score
 const scoreContainer = document.querySelector("#score");
 
-// exercice : ajouter la gestion du clique du bouton 
-
 // sélection de question-texte pour afficher la question
 const questionTexte = document.querySelector("#question-texte");
 
-// appel de la fonction afficherQuestion(questions[0])
-afficherQuestion(questions[indexQuestion]);
 
-// on modifie l'objet joueur pour tester l'affichage du score
-// à déplacer une fois que l'on a cliqué sur la proposition
-afficherScore();
+// exercice : ajouter la gestion du clique du bouton 
+document.querySelector("#btn-demarrer").addEventListener("click", () =>  {
+    document.querySelector("#ecran-accueil").style.display = "none";
+    document.querySelector("#ecran-quiz").style.display = "block";
+    // appel de la fonction afficherQuestion(questions[0])
+    afficherQuestion(questions[indexQuestion]);
+
+   
+})
+
+
 
